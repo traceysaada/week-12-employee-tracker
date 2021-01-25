@@ -39,7 +39,7 @@ function start() {
           "Exit"
         ]
       })
-
+    }
 //use select * to get everything.
 //view departments
 //view roles
@@ -48,6 +48,6 @@ function start() {
 
 //uses update
 //update employee roles
-
-module.exports = employeesDB
+ 
+module.exports = employeesDB();
 
