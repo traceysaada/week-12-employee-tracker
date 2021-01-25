@@ -1,4 +1,6 @@
 //all inquire to go in here
+const mysql = require("mysql");
+const inquirer = require("inquirer");
 
 //node index run in here
 
