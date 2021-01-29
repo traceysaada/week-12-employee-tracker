@@ -12,38 +12,17 @@ const connection = mysql.createConnection({
   password: "Catherine62#",
   database: "employeesDB"
 });
-connection.connect(function(err) {
-    if (err) throw err;
-    start();
-  });
-
 
 //write functions that will interact with data, one for every command use insert
 //add departments
 //add roles
 //add employees
-function start() {
-    inquirer
-      .prompt({
-        type: "list",
-        name: "option",
-        message: "What would you like to do?",
-        choices: [
-          "Add Department",
-          "Add Role",
-          "Add Employee",
-          "View Department",
-          "View Role",
-          "View Employee",
-          "Update Employee Role",
-          "Exit"
-        ]
-      })
-    }
+
 //use select * to get everything.
 //view departments
 //view roles
 //view employees 
+
 
 
 //uses update
