@@ -1,4 +1,15 @@
+const connection = require("./connection")
 
+class DatabaseQueries {
+    constructor(connection){
+        this.connection = connection
+    }
+    getAllDepartments(){
+        return this.connection.query("SELECT * FROM department"); 
+    }
+}
+
+module.exports = new DatabaseQueries(connection); 
 //write functions that will interact with data, one for every command use insert
 //add departments
 
@@ -14,5 +25,3 @@
 
 //uses update
 //update employee roles
- 
-module.exports = employeesDB();

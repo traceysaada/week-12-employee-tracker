@@ -1,11 +1,17 @@
 //all inquire to go in here
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
+const databaseQueries = require("./db/employeeDatabase")
 
+
+function initialise(){
+  console.log("...Loading...")
+  runSearch();
+}
 
 //question prompts
-function runSearch() {
-  inquirer
+async function runSearch() {
+ const { options } = await inquirer
     .prompt([
       {
         type: "list",
@@ -21,18 +27,18 @@ function runSearch() {
           "Update Employee Role",
           "Add Department",
           "Add Role",
-
           "Exit",
         ],
       },
     ])
-    .then(function (answer) {
-      switch (answer.option) {
-        case "view Departments.":
+   console.log(options)
+      switch (options) {
+        case "View Departments":
           viewDepartments();
+          console.log("departments")
           break;
 
-        case "view Roles.":
+        case "View Roles":
           viewRoles();
           break;
 
@@ -68,19 +74,16 @@ function runSearch() {
           endSession();
           break;
       }
-    });
+ 
 }
 //answer selections to move to relevant next stage ie roles or department etc
-function viewDepartments() {
-  connection.query(
-    "select id, dept_name, FROM department",
-    function (err, res) {
-      if (err) throw err;
-      console.table("departments", res);
-      runSearch();
+async function viewDepartments() {
+ const allDepartments = await databaseQueries.getAllDepartments(); 
+ console.table(allDepartments)
+ runSearch();
     }
-  );
-}
+  
+
 
 function viewEmployees() {
   let query =
@@ -109,3 +112,18 @@ function viewEmployeesByManager() {
     runSearch;
   });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+initialise();
