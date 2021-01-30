@@ -1,13 +1,7 @@
 //all inquire to go in here
-const mysql = require("mysql");
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
 
-//node index run in here
-connection.connect(function (err) {
-  if (err) throw err;
-  runSearch();
-});
 
 //question prompts
 function runSearch() {
