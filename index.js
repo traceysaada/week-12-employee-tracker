@@ -4,6 +4,7 @@ const consoleTable = require("console.table");
 const databaseQueries = require("./db/employeeDatabase");
 const { connection } = require("./db/employeeDatabase");
 
+
 function initialise() {
   console.log("...Loading...");
   runSearch();
@@ -154,37 +155,28 @@ async function addRole() {
 }
 // 
 async function updateEmployeeRole() {
-  let employeesQuery;
-  let employeeArray;
-  let answer;
-  try {
-    employeesQuery = await querySync(connection, "SELECT id, CONCAT(first_name, ' ', last_name) as name FROM employee", []);
-    roleQuery = await querySync(connection, "SELECT id, title FROM role", []);
-    if (roleQuery.length == 0) {
-      console.log("Please Insert roles or departments first");
-
-      return;
-    }
-    employeeArray = employeesQuery.map(elem => elem.name);
-    answer = await inquirer.prompt([
+  const updatedRole = await inquirer.prompt([
+ 
       {
         type: "list",
-        message: "Choose Employee To Update Role: ",
-        name: "name",
-        choices: employeeArray
+        name: "employee",
+        message: "Choose Employee you want to Update Role: ",
+       
       },
+
       {
         type: "list",
-        message: "Role: ",
-        name: "role",
-        choices: roleQuery.map(elem => elem.title)
+        message: "New Role: ",
+        name: "newRole",
+        choices: [1, 2, 3]
       }
-    ])
-    console.log(answer)
-  } catch(err) {
-    throw err;
+    ]);
+    await databaseQueries.EmployeeRole(EmployeeRole);
+  console.log(
+    "Successfully update new role. Select View employees to review"
+  );
+  runSearch();
   }
 
-}
 
 initialise();

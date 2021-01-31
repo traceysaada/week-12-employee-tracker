@@ -25,8 +25,8 @@ class DatabaseQueries {
         return this.connection.query("INSERT INTO role SET ?", NewRole)
     }
 
-    upDateEmployeeRole(NewRole){
-        return this.connection.qyery("UPDATE employee SET role_id = ? WHERE CONCAT(first_name, ' ', last_name) = ?", [NewEmployeeRole, fullname])
+    upDateEmployeeRole(EmployeeRole){
+        return this.connection.qyery("UPDATE employee SET role_id = ?", EmployeeRole)
     }
 //use select * to get everything.//view departments //view roles //view employees 
 
