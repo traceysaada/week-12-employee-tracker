@@ -14,11 +14,21 @@ class DatabaseQueries {
     getAllEmployees(){
         return this.connection.query("SELECT * FROM employee");
     }
+    getAllEmployeesByManager_id(){
+        return this.connection.query("SELECT * FROM manager_id");
+    }
     addNewDepartment(newDepartment){
         return this.connection.query("INSERT INTO department SET ?", newDepartment);
     }
     addNewEmployee(NewEmployee){
         return this.connection.query("INSERT INTO employee SET ?", NewEmployee)
+    }
+    addNewRole(NewRole){
+        return this.connection.query("INSERT INTO role SET ?", NewRole)
+    }
+
+    upDateEmployeeRole(NewRole){
+        return this.connection.qyery("INSERT INTO employee SET ?", NewEmployeeRole)
     }
 //use select * to get everything.//view departments //view roles //view employees 
 

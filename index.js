@@ -44,16 +44,16 @@ async function runSearch() {
       break;
 
     case "View Employees by Manager":
-      viewEmployeesByManager();
+      viewEmployeesByManager_id();
       break;
 
     case "Add Employees":
       addEmployee();
       break;
 
-    case "Remove Employee":
-      removeEmployee();
-      break;
+    // case "Remove Employee":
+    //   removeEmployee();
+    //   break;
 
     case "Update Employee Role":
       updateEmployeeRole();
@@ -88,9 +88,9 @@ async function viewEmployees() {
   console.table(allEmployees);
   runSearch();
 }
-async function viewEmployeesByManager() {
-  const allEmployees = await databaseQueries.getAllEmployeesByManager();
-  console.table(getAllEmployeesByManager);  
+async function viewEmployeesByManager_id() {
+  const allEmployeesByManager = await databaseQueries.getAllEmployeesByManager_id();
+  console.table(getAllEmployeesByManager_id);  
   runSearch();
 }
 
@@ -108,6 +108,7 @@ async function addDepartment() {
   );
   runSearch();
 }
+
 async function addEmployee() {
   const NewEmployee = await inquirer.prompt([
     {
@@ -120,7 +121,7 @@ async function addEmployee() {
       ]
     },
   ]);
-//think I need code here to select employee role & put in correct department thik this might be a JOIN ??
+//think I need code here to select employee role & put in correct department think this might be a JOIN ??
   await databaseQueries.addNewEmployee(NewEmployee);
   console.log(
     "Successfully created new employee. Select View Employees to review"
@@ -128,5 +129,39 @@ async function addEmployee() {
   );
   runSearch();
 }
+
+// async function updateEmployeeRole() {
+//   let employeesQuery;
+//   let employeeArray;
+//   let answer;
+//   try {
+//     employeesQuery = await querySync(connection, "SELECT id, CONCAT(first_name, ' ', last_name) as name FROM employee", []);
+//     roleQuery = await querySync(connection, "SELECT id, title FROM role", []);
+//     if (roleQuery.length == 0) {
+//       console.log("Please Insert roles or departments first");
+//       startPrompt();
+//       return;
+//     }
+//     employeeArray = employeesQuery.map(elem => elem.name);
+//     answer = await inquirer.prompt([
+//       {
+//         type: "list",
+//         message: "Choose Employee To Update Role: ",
+//         name: "name",
+//         choices: employeeArray
+//       },
+//       {
+//         type: "list",
+//         message: "Role: ",
+//         name: "role",
+//         choices: roleQuery.map(elem => elem.title)
+//       }
+//     ]);
+//   } catch(err) {
+//     throw err;
+//   }
+
+
+//}
 
 initialise();
