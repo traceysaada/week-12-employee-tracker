@@ -161,17 +161,17 @@ async function updateEmployeeRole() {
         type: "list",
         name: "employee",
         message: "Choose Employee you want to Update Role: ",
-       
+       choices: ["employee"]
       },
 
       {
         type: "list",
         message: "New Role: ",
-        name: "newRole",
+        name: "Role",
         choices: [1, 2, 3]
       }
     ]);
-    await databaseQueries.EmployeeRole(EmployeeRole);
+    await databaseQueries.EmployeeRole(Role);
   console.log(
     "Successfully update new role. Select View employees to review"
   );
