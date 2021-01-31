@@ -162,7 +162,7 @@ async function updateEmployeeRole() {
     roleQuery = await querySync(connection, "SELECT id, title FROM role", []);
     if (roleQuery.length == 0) {
       console.log("Please Insert roles or departments first");
-      startPrompt();
+
       return;
     }
     employeeArray = employeesQuery.map(elem => elem.name);
@@ -179,7 +179,8 @@ async function updateEmployeeRole() {
         name: "role",
         choices: roleQuery.map(elem => elem.title)
       }
-    ]);
+    ])
+    console.log(answer)
   } catch(err) {
     throw err;
   }
