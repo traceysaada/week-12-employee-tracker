@@ -14,9 +14,7 @@ class DatabaseQueries {
     getAllEmployees(){
         return this.connection.query("SELECT * FROM employee");
     }
-    getAllEmployeesByManager_id(){
-        return this.connection.query("SELECT * FROM manager_id");
-    }
+   
     addNewDepartment(newDepartment){
         return this.connection.query("INSERT INTO department SET ?", newDepartment);
     }
@@ -33,8 +31,6 @@ class DatabaseQueries {
 //use select * to get everything.//view departments //view roles //view employees 
 
 }
-
-//uses update //update employee roles
 
 module.exports = new DatabaseQueries(connection); 
 

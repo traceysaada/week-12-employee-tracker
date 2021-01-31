@@ -19,12 +19,10 @@ async function runSearch() {
         "View Departments",
         "View Roles",
         "View Employees",
-        "View Employees by Manager",
-        "Add Employee",
-        "Remove Employee",
-        "Update Employee Role",
         "Add Department",
+        "Add Employee",
         "Add Role",
+        "Update Employee Role",
         "Exit",
       ],
     },
@@ -43,30 +41,22 @@ async function runSearch() {
       viewEmployees();
       break;
 
-    case "View Employees by Manager":
-      viewEmployeesByManager_id();
-      break;
-
-    case "Add Employees":
-      addEmployee();
-      break;
-
-    // case "Remove Employee":
-    //   removeEmployee();
-    //   break;
-
-    case "Update Employee Role":
-      updateEmployeeRole();
-      break;
-
     case "Add Department":
       addDepartment();
       break;
+
+      case "Add Employee":
+        addEmployee();
+        break;
 
     case "Add Role":
       addRole();
       break;
 
+      case "Update Employee Role":
+        updateEmployeeRole();
+        break;
+  
     case "End session":
       endSession();
       break;
@@ -88,11 +78,6 @@ async function viewEmployees() {
   console.table(allEmployees);
   runSearch();
 }
-async function viewEmployeesByManager_id() {
-  const allEmployeesByManager = await databaseQueries.getAllEmployeesByManager_id();
-  console.table(getAllEmployeesByManager_id);  
-  runSearch();
-}
 
 async function addDepartment() {
   const newDepartment = await inquirer.prompt([
@@ -112,23 +97,35 @@ async function addDepartment() {
 async function addEmployee() {
   const NewEmployee = await inquirer.prompt([
     {
-      name: "name",
+      FirstName: "first name",
+      LastName: "last name",
       message: "what role would you like your new employee to do?",
-      choices: [
-        "engineer",
-        "administrator",
-        "Closer"
-      ]
+      choices: ["engineer", "administrator", "Closer"],
     },
   ]);
-//think I need code here to select employee role & put in correct department think this might be a JOIN ??
+  
   await databaseQueries.addNewEmployee(NewEmployee);
   console.log(
     "Successfully created new employee. Select View Employees to review"
-
   );
   runSearch();
 }
+
+async function addRole() {
+  const NewRole = await inquirer.prompt([
+    {
+      name: "name",
+      message: "What would you like to name the new role?",
+    },
+  ]);
+
+  await databaseQueries.addNewRole(NewRole);
+  console.log(
+    "Successfully created new role. Select View Roles to review"
+  );
+  runSearch();
+}
+
 
 // async function updateEmployeeRole() {
 //   let employeesQuery;
@@ -160,7 +157,6 @@ async function addEmployee() {
 //   } catch(err) {
 //     throw err;
 //   }
-
 
 //}
 
