@@ -26,7 +26,7 @@ class DatabaseQueries {
     }
 
     upDateEmployeeRole(NewRole){
-        return this.connection.qyery("INSERT INTO employee SET ?", NewEmployeeRole)
+        return this.connection.qyery("UPDATE employee SET role_id ?", NewEmployeeRole)
     }
 //use select * to get everything.//view departments //view roles //view employees 
 
